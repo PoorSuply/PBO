@@ -3,16 +3,17 @@ import java.util.concurrent.atomic.AtomicInteger;
 public abstract class Ternak {
     private static final AtomicInteger ID_COUNTER = new AtomicInteger(0);
     private final String id;
-    private String jenis;
+    private final String jenis; 
     private int usia;
     private double berat;
     private String jenisKelamin;
     private InfoTernak info;
-    public abstract void infolain();
 
-    public Ternak( String jenis, int usia, double berat, String jenisKelamin, InfoTernak info) {
+    public abstract void tempat();
+
+    public Ternak(String jenis, int usia, double berat, String jenisKelamin, InfoTernak info) {
         this.id = String.format("%05d", ID_COUNTER.incrementAndGet());
-        this.jenis = jenis;
+        this.jenis = jenis; 
         this.usia = usia;
         this.berat = berat;
         this.jenisKelamin = jenisKelamin;
@@ -43,11 +44,12 @@ public abstract class Ternak {
         return info;
     }
 
-    public static class Unggas extends Ternak {
+    public final class Unggas extends Ternak {
         public Unggas(int usia, double berat, String jenisKelamin, String statusKesehatan, String jenisPakan, double jumlahPakan, String jadwalPemberianPakan, boolean sudahDiberiPakan) {
             super("Unggas", usia, berat, jenisKelamin, new InfoTernak(statusKesehatan, jenisPakan, jumlahPakan, jadwalPemberianPakan, sudahDiberiPakan));
         }
-        public void infolain() {
+
+        public void tempat() {
             System.out.println("  Ruangan: Kandang");
             System.out.println("  SuhuMin Ruangan: 20*C");
             System.out.println("  SuhuMax Ruangan: 45*C");
@@ -58,7 +60,8 @@ public abstract class Ternak {
         public MamaliaTernak(int usia, double berat, String jenisKelamin, String statusKesehatan, String jenisPakan, double jumlahPakan, String jadwalPemberianPakan, boolean sudahDiberiPakan) {
             super("Mamalia", usia, berat, jenisKelamin, new InfoTernak(statusKesehatan, jenisPakan, jumlahPakan, jadwalPemberianPakan, sudahDiberiPakan));
         }
-        public void infolain() {
+
+        public final void tempat() {
             System.out.println("  Ruangan: Padang Rumput/Kandang");
             System.out.println("  SuhuMin Ruangan: 21*C");
             System.out.println("  SuhuMax Ruangan: 40*C");
